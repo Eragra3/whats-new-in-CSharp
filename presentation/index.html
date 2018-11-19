@@ -133,9 +133,11 @@
                 <h1>C# 7.0</h1>
             </section>
             <section>
-                <h2>Out variables</h2>
 
-                <pre><code class="C#" data-trim data-noescape>
+                <section>
+                    <h2>Inline out variables</h2>
+
+                    <pre><code class="C#" data-trim data-noescape>
                     string indexString = "42";
 
                     <mark>int index;</mark>
@@ -145,18 +147,91 @@
                     (...)
                 </code></pre>
 
-                <span class="fragment fade-in">
-                    <i class="fas fa-long-arrow-alt-right"></i>
+                    <span class="fragment fade-in">
+                        <i class="fas fa-long-arrow-alt-down"></i>
 
-                    <pre><code class="C#" data-trim data-noescape>
+                        <pre><code class="C#" data-trim data-noescape>
                         string indexString = "42";
     
                         if (int.TryParse(indexString, <mark>out int index</mark>))
                         {
                             int nextIndex = index + 1;
                         (...)
+                        </code></pre>
+                    </span>
+                </section>
+
+                <section>
+                    <h2>IL</h2>
+                    <pre><code class="C#" data-trim data-noescape>
+                        IL_0007: ldloc.0
+                        IL_0008: ldloca.s 1
+                        IL_000a: call bool [mscorlib]System.Int32::TryParse(string, int32&)
+                        IL_000f: stloc.2
+                        // sequence point: hidden
+                        IL_0010: ldloc.2
+                        IL_0011: brfalse.s IL_0031
                     </code></pre>
-                </span>
+
+                    <span class="fragment fade-in">
+                        <i class="fas fa-long-arrow-alt-down"></i>
+                        <pre><code class="C#" data-trim data-noescape>
+                            IL_0007: ldloc.0
+                            IL_0008: ldloca.s 1
+                            IL_000a: call bool [mscorlib]System.Int32::TryParse(string, int32&)
+                            IL_000f: stloc.2
+                            // sequence point: hidden
+                            IL_0010: ldloc.2
+                            IL_0011: brfalse.s IL_0031
+                        </code></pre>
+                    </span>
+                </section>
+
+                <section>
+                    <h2>Uwaga na scope zmiennej!</h2>
+
+                    <pre><code class="C#" data-trim data-noescape>
+                            static void Main(string[] args)
+                            {
+                                string indexString = "42";
+                                for (int i = 0; i < 100; i++)
+                                {
+                                    if (int.TryParse(indexString, out int index))
+                                    {
+                                        int nextIndex = index + 1;
+                                        Console.WriteLine($"Next person index is {nextIndex}");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Invalid index");
+                                    }
+                                }
+                            }
+                        </code></pre>
+                </section>
+
+                <section>
+                    <h2>Uwaga na scope zmiennej!</h2>
+
+                    <pre><code class="C#" data-trim data-noescape>
+                            static void Main(string[] args)
+                            {
+                                string indexString = "42";
+                                for (int i = 0; i < 100; i++)<mark>
+                                {
+                                    if (int.TryParse(indexString, out int index))
+                                    {
+                                        int nextIndex = index + 1;
+                                        Console.WriteLine($"Next person index is {nextIndex}");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Invalid index");
+                                    }
+                                }</mark>
+                            }
+                        </code></pre>
+                </section>
 
             </section>
             <section>Praktyczny przykład</section>
@@ -231,7 +306,12 @@
                     }
                 },
                 { src: 'node_modules/reveal.js-menu/menu.js' }
-            ]
+            ],
+            menu: {
+                numbers: true,
+                themes: true,
+                loadIcons: false
+            }
         });
     </script>
 </body>

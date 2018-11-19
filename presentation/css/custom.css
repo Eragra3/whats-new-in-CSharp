@@ -1,3 +1,7 @@
 mark {
     background-color: rgba(200, 0, 255, 0.5) !important;
 }
+
+.reveal pre code {
+    max-height: 600px !important;
+}
