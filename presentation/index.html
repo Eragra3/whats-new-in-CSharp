@@ -193,17 +193,17 @@
                     <pre><code class="C#" data-trim data-noescape>
                             static void Main(string[] args)
                             {
-                                string indexString = "42";
+                                string numberString = "42";
                                 for (int i = 0; i < 100; i++)
                                 {
-                                    if (int.TryParse(indexString, out int index))
+                                    if (int.TryParse(numberString, out int number))
                                     {
-                                        int nextIndex = index + 1;
-                                        Console.WriteLine($"Next person index is {nextIndex}");
+                                        int nextNumber = number + 1;
+                                        Console.WriteLine($"Next person number is {nextNumber}");
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Invalid index");
+                                        Console.WriteLine("Invalid number");
                                     }
                                 }
                             }
@@ -216,17 +216,17 @@
                     <pre><code class="C#" data-trim data-noescape>
                             static void Main(string[] args)
                             {
-                                string indexString = "42";
+                                string numberString = "42";
                                 for (int i = 0; i < 100; i++)<mark>
                                 {
-                                    if (int.TryParse(indexString, out int index))
+                                    if (int.TryParse(numberString, out int number))
                                     {
-                                        int nextIndex = index + 1;
-                                        Console.WriteLine($"Next person index is {nextIndex}");
+                                        int nextNumber = number + 1;
+                                        Console.WriteLine($"Next person number is {nextNumber}");
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Invalid index");
+                                        Console.WriteLine("Invalid number");
                                     }
                                 }</mark>
                             }
@@ -235,24 +235,49 @@
             </section>
 
             <section>
-                <h2>Krotki (tuples)</h2>
-
-                <pre><code class="C#" data-trim data-noescape>
-                    var t1 = new Tuple<int, double, int>(-3, 10, 4);
-                </code></pre>
-
-                <span class="fragment fade-in">
-                    <i class="fas fa-long-arrow-alt-down"></i>
+                <section>
+                    <h2>Krotki (tuples)</h2>
 
                     <pre><code class="C#" data-trim data-noescape>
-                        var t1 = (-3, 10, 4);
+                        var t1 = new Tuple&lt;int, double, int&gt;(-3, 10.0, 4);
                     </code></pre>
 
-                </span>
+                    <span class="fragment fade-in">
+                        <i class="fas fa-long-arrow-alt-down"></i>
 
+                        <pre><code class="C#" data-trim data-noescape>
+                            var t1 = (-3, 10.0, 4);
+                        </code></pre>
+
+                    </span>
+                </section>
+                <section>
+                    <h2>Nazwane krotki</h2>
+
+                    <pre><code class="C#" data-trim data-noescape>
+                        var t1 = (min: -3, avg: 10.0, max: 4);
+                        Console.WriteLine(t1.min);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Dekonstrukcja</h2>
+
+                    <pre><code class="C#" data-trim data-noescape>
+                            var minAvgMax = (min: -3, avg: 10.0, max: 4);
+                            var (min, avg, max) = minAvgMax;
+                            Console.WriteLine(min);
+                    </code></pre>
+
+                    <aside class="notes">
+                        Przykład
+                    </aside>
+                </section>
             </section>
-            <section>Discards</section>
-            <section>Praktyczny przykład, szczególnie z out variables</section>
+
+            <section>
+                Discards
+            </section>
             <section>Pattern matching</section>
             <section>Co jest nie tak z "safe castem"</section>
             <section>Duuużo praktycznych przykładów</section>
