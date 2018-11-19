@@ -8,6 +8,7 @@
     <title>reveal.js</title>
 
     <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/theme/black.css">
 
     <!-- Theme used for syntax highlighting of code -->
@@ -26,16 +27,169 @@
 <body>
     <div class="reveal">
         <div class="slides">
-            <section>Slide 1
+
+            <section>
+                <h2>Nowości w języku
+                    <span class="fragment strike">Cool</span>
+                    <span class="fragment fade-in">C#</span>
+                </h2>
+                <p class="fragment fade-in-and-out">C-like Object Oriented Language</p>
+
+                <h3>
+                    Daniel Bider
+                </h3>
 
                 <aside class="notes">
-                    Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you
-                    open
-                    the speaker notes window (hit »S« on your keyboard).
+                    <p>Biblioteka napisana w Simple Managed C (SMC), potem sportowana do C#</p>>
                 </aside>
+            </section>
+
+            <section>
+                <h2>Krótka historia C#</h2>
+                <span class="fragment fade-in">Rok powstania: </span>
+                <span class="fragment fade-in">1999</span>
+                <br \>
+                <span class="fragment fade-in">Twórca: </span>
+                <span class="fragment fade-in">Anders Hejlsberg</span>
+
+                <aside class="notes">
+                    <p>Java - 1995, Ryan Gosling</p>
+                    <p>C++ - 1985, Bjarne Stroustrup</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Wersje C#</h2>
+
+                <div class="fragment fade-in">
+                    <h3>C# 1.0 (1.1, 1.2)</h3>
+                    <p class="fragment fade-in">nic ciekawego</p>
+                </div>
+
+                <aside class="notes">
+                    <p>brak generyków, nie ma LINQ, kalka Javy (twórcy twierdzą, że nie kalka)</p>
+                </aside>
+            </section>
+
+            <section>
+                <h3>C# 2.0</h3>
+                <ul class="fragment fade-in">
+                    <li>Generics</li>
+                    <li>Nullable types</li>
+                    <li>Partial types</li>
+                    <li>Static classes</li>
+                    <li>Variance</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>C# 3.0</h3>
+                <ul class="fragment fade-in">
+                    <li>Var keyword</li>
+                    <li>Lambdas</li>
+                    <li>Object and collection initializers</li>
+                    <li>Auto-properties</li>
+                    <li>Extension methods</li>
+                    <li>Partial methods</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>C# 4.0</h3>
+                <ul class="fragment fade-in">
+                    <li>Dynamic binding...</li>
+                    <li>Generic variance</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>C# 5.0</h3>
+                <ul class="fragment fade-in">
+                    <li>Async</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>C# 6.0</h3>
+                <ul class="fragment fade-in">
+                    <li><b>Compiler-as-a-service (Roslyn)</b></li>
+                    <li>Auto property initializers</li>
+                    <li>String interpolation</li>
+                    <li>Nameof operator</li>
+                    <li>Exception filters</li>
+                    <li>Null propagator</li>
+                    <li>Dictionary initializer</li>
+                </ul>
+
+                <aside class="notes">
+                    <p>C#6 <a href="https://github.com/dotnet/roslyn/wiki/Languages-features-in-C%23-6-and-VB-14"></a></p>
+                </aside>
+            </section>
+
+            <section>
+                <h1>C# 7.0</h1>
+            </section>
+            <section>
+                <h2>Out variables</h2>
+
+                <pre><code class="C#" data-trim data-noescape>
+                        class OutOverloadExample
+                        {
+                            public void SampleMethod(int i) { }
+                            <mark class="highlight">public void SampleMethod(out int i) => i = 5;</mark>
+                        }
+                            </code></pre>
 
             </section>
-            <section>Slide 2</section>
+            <section>Praktyczny przykład</section>
+            <section>Krotki (tuples)</section>
+            <section>Praktyczny przykład</section>
+            <section>Discards</section>
+            <section>Praktyczny przykład, szczególnie z out variables</section>
+            <section>Pattern matching</section>
+            <section>Co jest nie tak z "safe castem"</section>
+            <section>Duuużo praktycznych przykładów</section>
+            <section>Uwaga na łamanie zasady podstawienia Liskova!</section>
+            <section>Funkcje lokalne</section>
+            <section>Praktyczny przykład</section>
+            <section>Ref local/return</section>
+            <section>Expression-bodied members</section>
+            <section>Pułapki wyrażenia "throw"</section>
+            <section>Wincyj "asynców"</section>
+            <section>Nowe wyrażenia literałów</section>
+            <section>C# 7.1</section>
+            <section>Ulepszonko pattern matchingu</section>
+            <section>Praktyczny przykład</section>
+            <section>Aync main</section>
+            <section>Inicjalizacja domyślną wartością</section>
+            <section>Domyślne nazwy elementów krotek</section>
+            <section>C# 7.2</section>
+            <section>In parameters</section>
+            <section>Praktyczny przykład</section>
+            <section>Ref struct widmo</section>
+            <section>Span</section>
+            <section>Memory</section>
+            <section>Ref readonly</section>
+            <section>Readonly struct</section>
+            <section>Non-trailing named arguments</section>
+            <section>Private protected</section>
+            <section>C# 7.3</section>
+            <section>Dodatkowe ograniczenia typów (w końcu!)</section>
+            <section>Ref local reassignment</section>
+            <section>Tuples equality</section>
+            <section>Backing-fields attributes</section>
+            <section>Co na horyzoncie? C# 8</section>
+            <section>Jeszcze bardziej rozbudowany pattern-matching i dekonstrukcja</section>
+            <section>Nullable reference types</section>
+            <section>Record classes</section>
+            <section>Domyślne implementacje interfejsów</section>
+            <section>Async streams</section>
+            <section>Ranges</section>
+            <section>Genericzne atrybuty</section>
+            <section>Target-typed new</section>
+            <section>Podsumowanie</section>
+            <section>Pytania</section>
+
         </div>
     </div>
 
