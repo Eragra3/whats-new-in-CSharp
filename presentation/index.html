@@ -138,25 +138,25 @@
                     <h2>Inline out variables</h2>
 
                     <pre><code class="C#" data-trim data-noescape>
-                    string indexString = "42";
+                        string numberString = "42";
 
-                    <mark>int index;</mark>
-                    if (int.TryParse(indexString, <mark>out index</mark>))
-                    {
-                        int nextIndex = index + 1;
-                    (...)
-                </code></pre>
+                        <mark>int number;</mark>
+                        if (int.TryParse(numberString, <mark>out number</mark>))
+                        {
+                            int nextNumber = number + 1;
+                        (...)
+                    </code></pre>
 
                     <span class="fragment fade-in">
                         <i class="fas fa-long-arrow-alt-down"></i>
 
                         <pre><code class="C#" data-trim data-noescape>
-                        string indexString = "42";
-    
-                        if (int.TryParse(indexString, <mark>out int index</mark>))
-                        {
-                            int nextIndex = index + 1;
-                        (...)
+                            string numberString = "42";
+        
+                            if (int.TryParse(numberString, <mark>out int number</mark>))
+                            {
+                                int nextNumber = number + 1;
+                            (...)
                         </code></pre>
                     </span>
                 </section>
@@ -232,11 +232,25 @@
                             }
                         </code></pre>
                 </section>
+            </section>
+
+            <section>
+                <h2>Krotki (tuples)</h2>
+
+                <pre><code class="C#" data-trim data-noescape>
+                    var t1 = new Tuple<int, double, int>(-3, 10, 4);
+                </code></pre>
+
+                <span class="fragment fade-in">
+                    <i class="fas fa-long-arrow-alt-down"></i>
+
+                    <pre><code class="C#" data-trim data-noescape>
+                        var t1 = (-3, 10, 4);
+                    </code></pre>
+
+                </span>
 
             </section>
-            <section>Praktyczny przykład</section>
-            <section>Krotki (tuples)</section>
-            <section>Praktyczny przykład</section>
             <section>Discards</section>
             <section>Praktyczny przykład, szczególnie z out variables</section>
             <section>Pattern matching</section>

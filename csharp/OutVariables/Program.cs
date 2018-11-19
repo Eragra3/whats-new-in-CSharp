@@ -6,14 +6,14 @@ namespace OutVariables
     {
         static void Main(string[] args)
         {
-            string indexString = "42";
+            string numberString = "42";
 
-            int index;
-            if (int.TryParse(indexString, out index))
+            int number;
+            if (int.TryParse(numberString, out number))
             {
-                int nextIndex = index + 1;
+                int nextIndex = number + 1;
 
-                Console.WriteLine($"Next person index is {nextIndex}");
+                Console.WriteLine($"Next person number is {nextIndex}");
             }
             else
             {
