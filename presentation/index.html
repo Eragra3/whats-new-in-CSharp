@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/theme/black.css">
 
     <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="lib/css/dracula.css">
 
     <!-- Printing and PDF exports -->
     <script>
@@ -22,6 +22,9 @@
         link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
         document.getElementsByTagName('head')[0].appendChild(link);
     </script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
 </head>
 
 <body>
@@ -133,12 +136,27 @@
                 <h2>Out variables</h2>
 
                 <pre><code class="C#" data-trim data-noescape>
-                        class OutOverloadExample
+                    string indexString = "42";
+
+                    <mark>int index;</mark>
+                    if (int.TryParse(indexString, <mark>out index</mark>))
+                    {
+                        int nextIndex = index + 1;
+                    (...)
+                </code></pre>
+
+                <span class="fragment fade-in">
+                    <i class="fas fa-long-arrow-alt-right"></i>
+
+                    <pre><code class="C#" data-trim data-noescape>
+                        string indexString = "42";
+    
+                        if (int.TryParse(indexString, <mark>out int index</mark>))
                         {
-                            public void SampleMethod(int i) { }
-                            <mark class="highlight">public void SampleMethod(out int i) => i = 5;</mark>
-                        }
-                            </code></pre>
+                            int nextIndex = index + 1;
+                        (...)
+                    </code></pre>
+                </span>
 
             </section>
             <section>Praktyczny przykład</section>
@@ -205,7 +223,14 @@
                 { src: 'plugin/markdown/marked.js' },
                 { src: 'plugin/markdown/markdown.js' },
                 { src: 'plugin/notes/notes.js', async: true },
-                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+                {
+                    src: 'plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function () {
+                        hljs.initHighlightingOnLoad();
+                    }
+                },
+                { src: 'node_modules/reveal.js-menu/menu.js' }
             ]
         });
     </script>
