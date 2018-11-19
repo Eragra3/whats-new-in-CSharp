@@ -248,7 +248,6 @@
                         <pre><code class="C#" data-trim data-noescape>
                             var t1 = (-3, 10.0, 4);
                         </code></pre>
-
                     </span>
                 </section>
                 <section>
@@ -276,12 +275,162 @@
             </section>
 
             <section>
-                Discards
+                <section>
+                    <h2>Pattern matching</h2>
+
+                    <aside class="notes">
+                        <a href="https://docs.microsoft.com/en-gb/dotnet/csharp/pattern-matching"></a>
+                    </aside>
+                </section>
+                <section>
+                    <h2>"Is" pattern</h2>
+
+                    <pre><code class="C#" data-trim data-noescape>
+                        if (p <mark>is Student</mark>)
+                        {
+                            <mark>var s = (Student) p;</mark>
+                            Console.WriteLine($"Index: {s.Index}");
+                        }
+                    </code></pre>
+
+                    <span class="fragment fade-in">
+                        <i class="fas fa-long-arrow-alt-down"></i>
+
+                        <pre><code class="C#" data-trim data-noescape>
+                            if (p <mark>is Student s</mark>)
+                            {
+                                Console.WriteLine($"Index: {s.Index}");
+                            }
+                        </code></pre>
+                    </span>
+
+
+                    <aside class="notes">
+                        Uwaga na ifologię, prawdopodobnie lepiej stworzyć dodatkowy interfejs
+                        IInfoPrinter i zrzucić odpowiedzialność przedstawiania się na klasy.
+                        Zaproponowane rozwiązanie jest podejściem funkcyjnym.
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>IL</h2>
+
+                    <div class="container-inline">
+                        <pre><code class="C#" data-trim data-noescape>
+                        IL_0001: ldarg.0
+                        IL_0002: isinst OutVariables.Student
+                        IL_0007: ldnull
+                        IL_0008: cgt.un
+                        IL_000a: stloc.0
+                        // sequence point: hidden
+                        IL_000b: ldloc.0
+                        IL_000c: brfalse.s IL_002d
+                    
+                        IL_000e: nop
+                        IL_000f: ldarg.0
+                        <span class="fragment highlight-red" data-fragment-index="1">IL_0010: castclass OutVariables.Student</span>
+                        IL_0015: stloc.1
+                    </code></pre>
+
+                        <span class="fragment fade-in">
+                            <i class="fas fa-long-arrow-alt-down"></i>
+                            <pre><code class="C#" data-trim data-noescape>
+                            IL_0001: ldarg.0
+                            IL_0002: isinst OutVariables.Student
+                            IL_0007: dup
+                            IL_0008: stloc.0
+                            IL_0009: ldnull
+                            IL_000a: cgt.un
+                            IL_000c: stloc.1
+                            // sequence point: hidden
+                            IL_000d: ldloc.1
+                            IL_000e: brfalse.s IL_0028
+                        </code></pre>
+                        </span>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Liskov is SOLID</h2>
+
+                    <ul>
+                        <li class="fragment fade-in">Metoda musi znać wszystkie klasy rozszerzające klasę Person</li>
+                        <li class="fragment fade-in">Dodanie nowej klasy dziedziczącej zepsuje kod</li>
+                        <li class="fragment fade-in">Łamiemy enkapsulację</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Uwaga na scope zmiennej!</h2>
+
+                    <pre><code class="C#" data-trim data-noescape>
+                        static void OldPrintInfo(Person p)
+                        {
+                            Console.WriteLine($"FirstName: {p.FirstName}");
+                            Console.WriteLine($"LastName: {p.LastName}");
+                
+                            if (p is Student s)<span class="fragment highlight-mark">
+                            {
+                                Console.WriteLine($"Index: {s.Index}");
+                            }</span>
+                            else if (p is Programmer)
+                            {
+                                var pr = (Programmer) p;
+                                Console.WriteLine($"CSharp: {pr.CSharp}");
+                                Console.WriteLine($"Java: {pr.Java}");
+                            }
+                        }
+                        </code></pre>
+                </section>
+                <section>
+                    <h2>Co jest nie tak z "safe castem"</h2>
+
+                    <pre><code class="C#" data-trim data-noescape>
+                        static void SafeCast()
+                        {
+                            object numbers = Enumerable.Range(-3, 10).ToArray();
+                
+                            foreach (var number in <span class="fragment highlight-mark" data-fragment-index="1">numbers as IEnumerable&lt;int&gt;</span>) <span class="fragment fade-in" style="color: red" data-fragment-index="1">NullPointerException</span>
+                            {
+                                Console.WriteLine(number);
+                            }
+                        }
+                    </code></pre>
+
+                </section>
+                <section>
+                    <h2>Co jest nie tak z "safe castem"</h2>
+
+                    <pre><code class="C#" data-trim data-noescape>
+                        private static void SafeCast()
+                            {
+                                object obj = Enumerable.Range(-3, 10).ToArray();
+                                IEnumerator<int> enumerator = <span class="fragment highlight-mark">(obj as IEnumerable<int>).GetEnumerator()</span>;
+                                try
+                                {
+                                    while (enumerator.MoveNext())
+                                    {
+                                        int current = enumerator.Current;
+                                        Console.WriteLine(current);
+                                    }
+                                }
+                                finally
+                                {
+                                    if (enumerator != null)
+                                    {
+                                        enumerator.Dispose();
+                                    }
+                                }
+                            }
+                    </code></pre>
+                </section>
             </section>
-            <section>Pattern matching</section>
-            <section>Co jest nie tak z "safe castem"</section>
-            <section>Duuużo praktycznych przykładów</section>
-            <section>Uwaga na łamanie zasady podstawienia Liskova!</section>
+            <section>
+                Discards
+
+                <aside class="notes">
+                    <a href="https://docs.microsoft.com/en-gb/dotnet/csharp/discards"></a>
+                </aside>
+            </section>
             <section>Funkcje lokalne</section>
             <section>Praktyczny przykład</section>
             <section>Ref local/return</section>
@@ -350,7 +499,9 @@
                 numbers: true,
                 themes: true,
                 loadIcons: false
-            }
+            },
+            width: '100%',
+            height: '100%'
         });
     </script>
 </body>

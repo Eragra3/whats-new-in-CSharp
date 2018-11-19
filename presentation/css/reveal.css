@@ -149,6 +149,7 @@ body {
 .reveal .slides section .fragment.highlight-red,
 .reveal .slides section .fragment.highlight-current-red,
 .reveal .slides section .fragment.highlight-green,
+.reveal .slides section .fragment.highlight-mark,
 .reveal .slides section .fragment.highlight-current-green,
 .reveal .slides section .fragment.highlight-blue,
 .reveal .slides section .fragment.highlight-current-blue {
@@ -160,6 +161,9 @@ body {
 
 .reveal .slides section .fragment.highlight-green.visible {
   color: #17ff2e; }
+
+.reveal .slides section .fragment.highlight-mark.visible {
+  background-color: rgba(200, 0, 255, 0.5) !important; }
 
 .reveal .slides section .fragment.highlight-blue.visible {
   color: #1b91ff; }
