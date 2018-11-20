@@ -495,11 +495,185 @@
           </code></pre>
         </section>
 
-
       </section>
-      <section>Funkcje lokalne</section>
-      <section>Praktyczny przykład</section>
-      <section>Ref local/return</section>
+      <section>
+        <section>
+          <h2>Local functions</h2>
+
+          <div class="container-inline">
+            <pre><code class="cs" data-trim data-noescape>
+          static void PrintInterestingInfo(Programmer p, int indentationSize)
+          {
+              var indentation = new string(' ', indentationSize);
+  
+              Console.WriteLine("Person:");
+              PrintIndented(p.FirstName, <span class="fragment highlight-mark" data-fragment-index="1">indentation</span>);
+              PrintIndented(p.LastName, <span class="fragment highlight-mark" data-fragment-index="1">indentation</span>);
+              PrintIndented(p.CSharp, <span class="fragment highlight-mark" data-fragment-index="1">indentation</span>);
+              PrintIndented(p.Java, <span class="fragment highlight-mark" data-fragment-index="1">indentation</span>);
+              PrintIndented(p.SightDefect, <span class="fragment highlight-mark" data-fragment-index="1">indentation</span>);
+          }
+          <span class="fragment highlight-mark" data-fragment-index="1">
+          static void PrintIndented(object o, string indentation)
+          {
+              var text = o ?? "<NA>";
+              Console.WriteLine(indentation + text);
+          }
+          </span>
+          </code></pre>
+
+            <span class="fragment fade-in">
+              <i class="fas fa-long-arrow-alt-right"></i>
+              <pre><code data-trim data-noescape>
+                static void PrintInterestingInfo(Programmer p, int indentationSize)
+                {
+                    var indentation = new string(' ', indentationSize);
+        
+                    Console.WriteLine("Person:");
+                    PrintIndented(p.FirstName);
+                    PrintIndented(p.LastName);
+                    PrintIndented(p.CSharp);
+                    PrintIndented(p.Java);
+                    PrintIndented(p.SightDefect);
+        
+                    <span class="fragment highlight-mark" data-fragment-index="1">
+                    void PrintIndented(object o)
+                    {
+                        var text = o ?? "<NA>";
+                        Console.WriteLine(indentation + text);
+                    }
+                  }
+                </span>
+              </code></pre>
+            </span>
+          </div>
+
+          <aside class="notes">
+            Przykład w VS
+          </aside>
+
+        </section>
+
+        <section>
+          <h2>Local functions - generowany kod</h2>
+
+          <pre><code data-trim data-noescape>
+              [StructLayout(LayoutKind.Auto)]
+              [CompilerGenerated]
+              private struct &lt;&gt;c__DisplayClass1_0
+              {
+                  public string indentation;
+              }
+          
+              public void M(int n)
+              {
+              }
+          
+              private static void PrintInterestingInfo(Programmer p, int indentationSize)
+              {
+                  &lt;&gt;c__DisplayClass1_0 &lt;&gt;c__DisplayClass1_ = default(&lt;&gt;c__DisplayClass1_0);
+                  &lt;&gt;c__DisplayClass1_.indentation = new string(' ', indentationSize);
+                  Console.WriteLine("Person:");
+                  &lt;PrintInterestingInfo&gt;g__PrintIndented|1_0(p.FirstName, ref &lt;&gt;c__DisplayClass1_);
+                  &lt;PrintInterestingInfo&gt;g__PrintIndented|1_0(p.LastName, ref &lt;&gt;c__DisplayClass1_);
+                  &lt;PrintInterestingInfo&gt;g__PrintIndented|1_0(p.CSharp, ref &lt;&gt;c__DisplayClass1_);
+                  &lt;PrintInterestingInfo&gt;g__PrintIndented|1_0(p.Java, ref &lt;&gt;c__DisplayClass1_);
+                  &lt;PrintInterestingInfo&gt;g__PrintIndented|1_0(((double, double))p.SightDefect, ref &lt;&gt;c__DisplayClass1_);
+              }
+          
+              [CompilerGenerated]
+              internal static void &lt;PrintInterestingInfo&gt;g__PrintIndented|1_0(object o, ref &lt;&gt;c__DisplayClass1_0 P_1)
+              {
+                  object arg = o ?? "";
+                  Console.WriteLine(P_1.indentation + arg);
+              }
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Lambda functions - generowany kod</h2>
+
+          <pre><code data-trim data-noescape>
+            [CompilerGenerated]
+            private sealed class &lt;&gt;c__DisplayClass1_0
+            {
+                public string indentation;
+        
+                internal void &lt;MehPrintInterestingInfo&gt;b__0(object o)
+                {
+                    object arg = o ?? "&lt;NA&gt;";
+                    Console.WriteLine(indentation + arg);
+                }
+            }
+        
+            public void M(int n)
+            {
+            }
+        
+            private static void MehPrintInterestingInfo(Programmer p, int indentationSize)
+            {
+                &lt;&gt;c__DisplayClass1_0 &lt;&gt;c__DisplayClass1_ = new &lt;&gt;c__DisplayClass1_0();
+                &lt;&gt;c__DisplayClass1_.indentation = new string(' ', indentationSize);
+                Action&lt;object&gt; action = &lt;&gt;c__DisplayClass1_.&lt;MehPrintInterestingInfo&gt;b__0;
+                Console.WriteLine("Person:");
+                action(p.FirstName);
+                action(p.LastName);
+                action(p.CSharp);
+                action(p.Java);
+                action(((double, double))p.SightDefect);
+            }
+          </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Ref local/return</h2>
+
+          <aside class="notes">
+            <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/ref-returns"></a>
+          </aside>
+        </section>
+        <section>
+          <h2>Ref return</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            class MyArray
+            {
+                int[] numbers;
+    
+                public int Length => numbers.Length;
+    
+                public MyArray(params int[] numbers)
+                {
+                    this.numbers = numbers;
+                }
+    
+                internal <span class="fragment highlight-mark" data-fragment-index="1">ref int</span> this[int index] => <span class="fragment highlight-mark" data-fragment-index="1">ref</span> numbers[index];</span>
+    
+                internal void Print()
+                {
+                    foreach (var number in numbers)
+                    {
+                        Console.Write(number + " ");
+                    }
+                    Console.WriteLine();
+                }
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h2>Ref local</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            var evenNumbers = new MyArray(2, 4, 6, 8, 10);
+            <span class="fragment highlight-mark" data-fragment-index="1">ref</span> var number = <span class="fragment highlight-mark" data-fragment-index="1">ref</span> evenNumbers[2];
+          </code></pre>
+
+          <aside class="notes">
+            Przykłady w VS
+          </aside>
+        </section>
+      </section>
       <section>Expression-bodied members</section>
       <section>Pułapki wyrażenia "throw"</section>
       <section>Wincyj "asynców"</section>

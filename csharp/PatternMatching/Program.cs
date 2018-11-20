@@ -24,7 +24,7 @@ namespace PatternMatching
                 SightDefect = (0, 0)
             };
 
-            var stepien = new Programmer
+            var paweł = new Programmer
             {
                 FirstName = "Paweł",
                 LastName = "Żondzi",
@@ -36,12 +36,12 @@ namespace PatternMatching
             Console.WriteLine("Old way:");
             OldPrintInfo(daniel);
             OldPrintInfo(artur);
-            OldPrintInfo(stepien);
+            OldPrintInfo(paweł);
 
             Console.WriteLine("\nNew way:");
             NewPrintInfo(daniel);
             NewPrintInfo(artur);
-            NewPrintInfo(stepien);
+            NewPrintInfo(paweł);
 
             Console.ReadKey();
         }

@@ -3,11 +3,11 @@ mark {
 }
 
 .reveal pre code {
-    max-height: 600px !important;
+    max-height: 800px !important;
 }
 
 .container-inline pre {
     display: inline-block !important;
-    max-width: 40% !important;
+    max-width: 48% !important;
     vertical-align: top;
 }
