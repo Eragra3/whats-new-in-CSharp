@@ -674,10 +674,89 @@
           </aside>
         </section>
       </section>
-      <section>Expression-bodied members</section>
-      <section>Pułapki wyrażenia "throw"</section>
-      <section>Wincyj "asynców"</section>
-      <section>Nowe wyrażenia literałów</section>
+      <section>
+        <section>
+          <h2>Lecimy tutaj</h2>
+        </section>
+        <section>
+          <h2>Expression-bodied members</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            // Expression-bodied constructor
+            public ExpressionMembersExample(string label) <span class="fragment highlight-mark" data-fragment-index="1">=></span> this.Label = label;
+
+            // Expression-bodied finalizer
+            ~ExpressionMembersExample() <span class="fragment highlight-mark" data-fragment-index="1">=></span> Console.Error.WriteLine("Finalized!");
+
+            private string label;
+
+            // Expression-bodied get / set accessors.
+            public string Label
+            {
+                get <span class="fragment highlight-mark" data-fragment-index="1">=></span> label;
+                set <span class="fragment highlight-mark" data-fragment-index="1">=></span> this.label = value ?? "Default label";
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h2>Throw exceptions</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            // Conditional expression
+            public string Name
+            {
+                get => name;
+                set => name = value ?? 
+                    throw new ArgumentNullException(paramName: nameof(value), message: "New name must not be null");
+            }
+
+            // During initialization
+            private ConfigResource loadedConfig = LoadConfigResourceOrDefault() ?? 
+                throw new InvalidOperationException("Could not load config");
+          </code></pre>
+        </section>
+        <section>
+          <h2>Generalized async return types</h2>
+
+          <p>Metody asynchroniczne mogą zwracać dowolny typ posiadający odpowiednia implementację</p>
+
+          <pre><code class="cs" data-trim data-noescape>
+            public async <span class="fragment highlight-mark">ValueTask&lt;int&gt;</span> Func()
+            {
+              await Task.Delay(100);
+              return 5;
+            }
+          </code></pre>
+
+          <a href="https://github.com/dotnet/roslyn/blob/master/docs/features/task-types.md">Roslyn - Task Types</a>
+        </section>
+        <section>
+          <h2>Numeric literal syntax improvements</h2>
+          <h3>Binary literals</h3>
+
+          <pre><code class="cs" data-trim data-noescape>
+            int One   = 0b0001;
+            int Two   = 0b0010;
+            int Four  = 0b0100;
+            int Eight = 0b1000;
+          </code></pre>
+          
+          <pre><code class="cs" data-trim data-noescape>
+            int TwentySeven       = 27;
+            int TwentySevenBinary = 0b11011;
+            int TwentySevenHex    = 0x1B;
+          </code></pre>
+        </section>
+        <section>
+            <h2>Numeric literal syntax improvements</h2>
+            <h3>Digit separator</h3>
+
+            <pre><code class="cs" data-trim data-noescape>
+              long pierdyliard = 1_000_000_420_069;
+              int binaryMask   = 0b_1000_0000_1111_0000;
+            </code></pre>
+        </section>
+      </section>
       <section>C# 7.1</section>
       <section>Ulepszonko pattern matchingu</section>
       <section>Praktyczny przykład</section>

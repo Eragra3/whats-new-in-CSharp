@@ -8,7 +8,6 @@ namespace Discards
     {
         static async Task Main(string[] args)
         {
-
             DeconstructionDiscard();
 
             OutDiscard();
