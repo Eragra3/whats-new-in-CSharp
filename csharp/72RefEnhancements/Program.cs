@@ -6,7 +6,13 @@ namespace _72RefEnhancements
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            InParameters.Run();
+
+            RefReadonly.Run();
+
+            ReadonlyStruct.Run();
+
+            Console.ReadKey();
         }
     }
 }

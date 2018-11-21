@@ -918,13 +918,104 @@
             https://docs.microsoft.com/pl-pl/dotnet/csharp/whats-new/csharp-7-2</a>
         </aside>
       </section>
-      <section>In parameters</section>
-      <section>Praktyczny przykład</section>
-      <section>Ref struct widmo</section>
-      <section>Span</section>
-      <section>Memory</section>
-      <section>Ref readonly</section>
-      <section>Readonly struct</section>
+
+      <section>
+        <section>
+          <h1>In parameters</h1>
+
+          <pre><code class="cs" data-trim data-noescape>
+            static void Print(<span class="fragment highlight-mark">in</span> int number)
+            {
+                Console.WriteLine(number);
+            }
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Demo</h1>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h2>Ref readonly</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            static <span class="fragment highlight-mark" data-fragment-index="1">ref readonly</span> int GetReadonlyRef(in int number)
+            {
+                return <span class="fragment highlight-mark" data-fragment-index="1">ref</span> number;
+            }
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Demo</h1>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h2>Readonly struct</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+          <span class="fragment highlight-mark">readonly</span> struct Point3D
+            {
+                public readonly double X;
+                public readonly double Y;
+                public readonly double Z;
+
+                public Point3D(double x, double y, double z)
+                {
+                    X = x;
+                    Y = y;
+                    Z = z;
+                }
+            }
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Demo</h1>
+        </section>
+      </section>
+
+      <section>
+        <h2>Ref struct</h2>
+        <ul>
+          <li>
+            Struktura będzie zawsze alokowana na stosie
+            <ul>
+              <li>nie może być członkiem klasy</li>
+              <li>nie może być użyta w miejscach, które wymagają alokacji na stercie</li>
+            </ul>
+          </li>
+        </ul>
+
+        <pre><code class="cs" data-trim data-noescape>
+            <span class="fragment highlight-mark" data-fragment-index="1"><span class="fragment fade-in">readonly</span> ref</span> struct Point3dOn_ReadOnlyStack
+            {
+                public readonly double X;
+                public readonly double Y;
+                public readonly double Z;
+
+                public Point3dOn_ReadOnlyStack(double x, double y, double z)
+                {
+                    X = x;
+                    Y = y;
+                    Z = z;
+                }
+            }
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>Span</h2>
+
+        
+      </section>
+      <section>
+        <h2>Memory</h2>
+      </section>
       <section>Non-trailing named arguments</section>
       <section>Private protected</section>
       <section>
