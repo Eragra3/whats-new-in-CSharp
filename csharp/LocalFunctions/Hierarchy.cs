@@ -1,4 +1,4 @@
-﻿namespace PatternMatching
+﻿namespace LocalFunctions
 {
     abstract class Person
     {

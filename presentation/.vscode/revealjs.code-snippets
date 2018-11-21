@@ -15,6 +15,19 @@
   // 	],
   // 	"description": "Log output to console"
   // }
+  "reveal-code-cs-arrow": {
+    "scope": "html",
+    "prefix": "rcodecsarrow",
+    "body": [
+      "<span class=\"fragment fade-in\">",
+      "  <i class=\"fas fa-long-arrow-alt-down\"></i>",
+      "  <pre><code class=\"cs\" data-trim data-noescape>",
+      "    $0",
+      "  </code></pre>",
+      "</span>"
+    ],
+    "description": "Add syntax coloring block for C#"
+  },
   "reveal-code-cs": {
     "scope": "html",
     "prefix": "rcodecs",

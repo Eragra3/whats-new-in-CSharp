@@ -88,7 +88,7 @@
       <section>
         <h3>C# 3.0</h3>
         <ul class="fragment fade-in">
-          <li>Var keyword</li>
+          <li><i>Var</i> keyword</li>
           <li>Lambdas</li>
           <li>Object and collection initializers</li>
           <li>Auto-properties</li>
@@ -138,99 +138,99 @@
           <h2>Inline out variables</h2>
 
           <pre><code class="cs" data-trim data-noescape>
-                        string numberString = "42";
+            string numberString = "42";
 
-                        <mark>int number;</mark>
-                        if (int.TryParse(numberString, <mark>out number</mark>))
-                        {
-                            int nextNumber = number + 1;
-                        (...)
-                    </code></pre>
+            <span class="fragment highlight-mark" data-fragment-index="1">int number;</span>
+            if (int.TryParse(numberString, <span class="fragment highlight-mark" data-fragment-index="1">out number</span>))
+            {
+                int nextNumber = number + 1;
+            (...)
+          </code></pre>
 
           <span class="fragment fade-in">
             <i class="fas fa-long-arrow-alt-down"></i>
 
             <pre><code class="cs" data-trim data-noescape>
-                            string numberString = "42";
-        
-                            if (int.TryParse(numberString, <mark>out int number</mark>))
-                            {
-                                int nextNumber = number + 1;
-                            (...)
-                        </code></pre>
+              string numberString = "42";
+
+              if (int.TryParse(numberString, <span class="fragment highlight-mark">out int number</span>))
+              {
+                  int nextNumber = number + 1;
+              (...)
+            </code></pre>
           </span>
         </section>
 
         <section>
           <h2>IL</h2>
           <pre><code class="cs" data-trim data-noescape>
-                        IL_0007: ldloc.0
-                        IL_0008: ldloca.s 1
-                        IL_000a: call bool [mscorlib]System.Int32::TryParse(string, int32&)
-                        IL_000f: stloc.2
-                        // sequence point: hidden
-                        IL_0010: ldloc.2
-                        IL_0011: brfalse.s IL_0031
-                    </code></pre>
+            IL_0007: ldloc.0
+            IL_0008: ldloca.s 1
+            IL_000a: call bool [mscorlib]System.Int32::TryParse(string, int32&)
+            IL_000f: stloc.2
+            // sequence point: hidden
+            IL_0010: ldloc.2
+            IL_0011: brfalse.s IL_0031
+          </code></pre>
 
           <span class="fragment fade-in">
             <i class="fas fa-long-arrow-alt-down"></i>
             <pre><code class="cs" data-trim data-noescape>
-                            IL_0007: ldloc.0
-                            IL_0008: ldloca.s 1
-                            IL_000a: call bool [mscorlib]System.Int32::TryParse(string, int32&)
-                            IL_000f: stloc.2
-                            // sequence point: hidden
-                            IL_0010: ldloc.2
-                            IL_0011: brfalse.s IL_0031
-                        </code></pre>
+              IL_0007: ldloc.0
+              IL_0008: ldloca.s 1
+              IL_000a: call bool [mscorlib]System.Int32::TryParse(string, int32&)
+              IL_000f: stloc.2
+              // sequence point: hidden
+              IL_0010: ldloc.2
+              IL_0011: brfalse.s IL_0031
+            </code></pre>
           </span>
+
+          <aside class="notes">
+            <table>
+              <thead>
+                <th>operation</th>
+                <th>description</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ldloc.0</td>
+                  <td>Load local variable 0 onto stack.</td>
+                </tr>
+                <tr>
+                  <td>ldloca.s &lt;uint8 (indx)&gt;</td>
+                  <td>Load address of local variable with index indx, short form.</td>
+                </tr>
+              </tbody>
+            </table>
+          </aside>
         </section>
 
         <section>
-          <h2>Uwaga na scope zmiennej!</h2>
+          <h2>Uwaga na zasięg zmiennej!</h2>
 
           <pre><code class="cs" data-trim data-noescape>
-                            static void Main(string[] args)
-                            {
-                                string numberString = "42";
-                                for (int i = 0; i < 100; i++)
-                                {
-                                    if (int.TryParse(numberString, out int number))
-                                    {
-                                        int nextNumber = number + 1;
-                                        Console.WriteLine($"Next person number is {nextNumber}");
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Invalid number");
-                                    }
-                                }
-                            }
-                        </code></pre>
-        </section>
+            static void Main(string[] args)
+            {
+                string numberString = "42";
+                for (int i = 0; i < 100; i++)<span class="fragment highlight-mark" data-fragment-index="2">
+                {
+                    if (int.TryParse(numberString, <span class="fragment highlight-mark" data-fragment-index="1">out int number</span>))
+                    {
+                        int nextNumber = number + 1;
+                        Console.WriteLine($"Next person number is {nextNumber}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid number");
+                    }
+                }</span>
+            }
+            </code></pre>
 
-        <section>
-          <h2>Uwaga na scope zmiennej!</h2>
-
-          <pre><code class="cs" data-trim data-noescape>
-                            static void Main(string[] args)
-                            {
-                                string numberString = "42";
-                                for (int i = 0; i < 100; i++)<mark>
-                                {
-                                    if (int.TryParse(numberString, out int number))
-                                    {
-                                        int nextNumber = number + 1;
-                                        Console.WriteLine($"Next person number is {nextNumber}");
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Invalid number");
-                                    }
-                                }</mark>
-                            }
-                        </code></pre>
+          <aside class="notes">
+            Przykład
+          </aside>
         </section>
       </section>
 
@@ -239,34 +239,34 @@
           <h2>Krotki (tuples)</h2>
 
           <pre><code class="cs" data-trim data-noescape>
-                        var t1 = new Tuple&lt;int, double, int&gt;(-3, 10.0, 4);
-                    </code></pre>
+            var t1 = new Tuple&lt;int, double, int&gt;(-3, 10.0, 4);
+          </code></pre>
 
           <span class="fragment fade-in">
             <i class="fas fa-long-arrow-alt-down"></i>
 
             <pre><code class="cs" data-trim data-noescape>
-                            var t1 = (-3, 10.0, 4);
-                        </code></pre>
+              var t1 = (-3, 10.0, 4);
+            </code></pre>
           </span>
         </section>
         <section>
           <h2>Nazwane krotki</h2>
 
           <pre><code class="cs" data-trim data-noescape>
-                        var t1 = (min: -3, avg: 10.0, max: 4);
-                        Console.WriteLine(t1.min);
-                    </code></pre>
+            var t1 = (min: -3, avg: 10.0, max: 4);
+            Console.WriteLine(t1.min);
+          </code></pre>
         </section>
 
         <section>
           <h2>Dekonstrukcja</h2>
 
           <pre><code class="cs" data-trim data-noescape>
-                            var minAvgMax = (min: -3, avg: 10.0, max: 4);
-                            var (min, avg, max) = minAvgMax;
-                            Console.WriteLine(min);
-                    </code></pre>
+            var minAvgMax = (min: -3, avg: 10.0, max: 4);
+            var (min, avg, max) = minAvgMax;
+            Console.WriteLine(min);
+          </code></pre>
 
           <aside class="notes">
             Przykład
@@ -286,22 +286,22 @@
           <h2>"Is" pattern</h2>
 
           <pre><code class="cs" data-trim data-noescape>
-                        if (p <mark>is Student</mark>)
-                        {
-                            <mark>var s = (Student) p;</mark>
-                            Console.WriteLine($"Index: {s.Index}");
-                        }
-                    </code></pre>
+            if (p <span class="fragment highlight-mark" data-fragment-index="1">is Student</span>)
+            {
+              <span class="fragment highlight-mark" data-fragment-index="1">var s = (Student) p;</span>
+                Console.WriteLine($"Index: {s.Index}");
+            }
+          </code></pre>
 
           <span class="fragment fade-in">
             <i class="fas fa-long-arrow-alt-down"></i>
 
             <pre><code class="cs" data-trim data-noescape>
-                            if (p <mark>is Student s</mark>)
-                            {
-                                Console.WriteLine($"Index: {s.Index}");
-                            }
-                        </code></pre>
+              if (p <span class="fragment highlight-mark" data-fragment-index="1">is Student s</span>)
+              {
+                  Console.WriteLine($"Index: {s.Index}");
+              }
+            </code></pre>
           </span>
 
 
@@ -317,35 +317,35 @@
 
           <div class="container-inline">
             <pre><code class="cs" data-trim data-noescape>
-                        IL_0001: ldarg.0
-                        IL_0002: isinst OutVariables.Student
-                        IL_0007: ldnull
-                        IL_0008: cgt.un
-                        IL_000a: stloc.0
-                        // sequence point: hidden
-                        IL_000b: ldloc.0
-                        IL_000c: brfalse.s IL_002d
-                    
-                        IL_000e: nop
-                        IL_000f: ldarg.0
-                        <span class="fragment highlight-red" data-fragment-index="1">IL_0010: castclass OutVariables.Student</span>
-                        IL_0015: stloc.1
-                    </code></pre>
+              IL_0001: ldarg.0
+              IL_0002: isinst OutVariables.Student
+              IL_0007: ldnull
+              IL_0008: cgt.un
+              IL_000a: stloc.0
+              // sequence point: hidden
+              IL_000b: ldloc.0
+              IL_000c: brfalse.s IL_002d
+          
+              IL_000e: nop
+              IL_000f: ldarg.0
+              <span class="fragment highlight-red" data-fragment-index="1">IL_0010: castclass OutVariables.Student</span>
+              IL_0015: stloc.1
+            </code></pre>
 
             <span class="fragment fade-in">
-              <i class="fas fa-long-arrow-alt-down"></i>
+              <i class="fas fa-long-arrow-alt-right"></i>
               <pre><code class="cs" data-trim data-noescape>
-                            IL_0001: ldarg.0
-                            IL_0002: isinst OutVariables.Student
-                            IL_0007: dup
-                            IL_0008: stloc.0
-                            IL_0009: ldnull
-                            IL_000a: cgt.un
-                            IL_000c: stloc.1
-                            // sequence point: hidden
-                            IL_000d: ldloc.1
-                            IL_000e: brfalse.s IL_0028
-                        </code></pre>
+                IL_0001: ldarg.0
+                IL_0002: isinst OutVariables.Student
+                IL_0007: dup
+                IL_0008: stloc.0
+                IL_0009: ldnull
+                IL_000a: cgt.un
+                IL_000c: stloc.1
+                // sequence point: hidden
+                IL_000d: ldloc.1
+                IL_000e: brfalse.s IL_0028
+              </code></pre>
             </span>
           </div>
         </section>
@@ -360,7 +360,7 @@
           </ul>
         </section>
         <section>
-          <h2>Uwaga na scope zmiennej!</h2>
+          <h2>Uwaga na zasięg zmiennej!</h2>
 
           <pre><code class="cs" data-trim data-noescape>
                         static void OldPrintInfo(Person p)
@@ -441,6 +441,10 @@
             Console.WriteLine(min);
           </code></pre>
 
+          <aside class="notes">
+            W kodzie pośrednim nie będziemy mieli zmiennych lokalnych dla odrzuconych parametrów.
+            Krotka nadal jest tworzona w całości.
+          </aside>
         </section>
         <section>
           <h2>Out variables</h2>
@@ -740,7 +744,7 @@
             int Four  = 0b0100;
             int Eight = 0b1000;
           </code></pre>
-          
+
           <pre><code class="cs" data-trim data-noescape>
             int TwentySeven       = 27;
             int TwentySevenBinary = 0b11011;
@@ -748,22 +752,172 @@
           </code></pre>
         </section>
         <section>
-            <h2>Numeric literal syntax improvements</h2>
-            <h3>Digit separator</h3>
+          <h2>Numeric literal syntax improvements</h2>
+          <h3>Digit separator</h3>
 
-            <pre><code class="cs" data-trim data-noescape>
+          <pre><code class="cs" data-trim data-noescape>
               long pierdyliard = 1_000_000_420_069;
               int binaryMask   = 0b_1000_0000_1111_0000;
             </code></pre>
         </section>
       </section>
-      <section>C# 7.1</section>
-      <section>Ulepszonko pattern matchingu</section>
-      <section>Praktyczny przykład</section>
-      <section>Aync main</section>
-      <section>Inicjalizacja domyślną wartością</section>
-      <section>Domyślne nazwy elementów krotek</section>
-      <section>C# 7.2</section>
+      <section>
+        <h1>C# 7.1</h1>
+
+        <aside class="notes">
+          <a href="https://docs.microsoft.com/pl-pl/dotnet/csharp/whats-new/csharp-7-1">
+            https://docs.microsoft.com/pl-pl/dotnet/csharp/whats-new/csharp-7-1</a>
+          <a href="https://www.danielcrabtree.com/blog/329/c-sharp-7-1-everything-you-need-to-know">
+            https://www.danielcrabtree.com/blog/329/c-sharp-7-1-everything-you-need-to-know</a>
+        </aside>
+      </section>
+      <section>
+        <section>
+          <h1>Generic types pattern matching</h2>
+        </section>
+
+        <section>
+          <h2>Generic types</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+              public static void WhatAmI&lt;T>(T me)
+              {
+                  switch (me)
+                  {
+                      case int _:
+                          Console.WriteLine("I'm an int");
+                          break;
+                      case string _:
+                          Console.WriteLine("I'm a string");
+                          break;
+                      case object _:
+                          Console.WriteLine("I'm an object");
+                          break;
+                      default:
+                          Console.WriteLine("I'm a ninja");
+                          break;
+                  }
+              }
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Open types</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+              public static void WhatAmIExactly&lt;TParam&gt;(Action&lt;TParam> me)
+              {
+                  switch (me)
+                  {
+                      case Action&lt;int> _:
+                          Console.WriteLine("I return an int");
+                          break;
+                      case Action&lt;object> _:
+                          Console.WriteLine("I return an object");
+                          break;
+                      case Action&lt;string> _:
+                          Console.WriteLine("I return a string");
+                          break;
+                      default:
+                          Console.WriteLine("I'm a ninja");
+                          break;
+                  }
+              }
+          </code></pre>
+        </section>
+        <section>
+          <h1>Demo</h1>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Lecimy tutaj</h2>
+        </section>
+        <section>
+          <h2>Async main</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            static void Main()
+            {
+                DoAsyncWork().GetAwaiter().GetResult();
+            }
+          </code></pre>
+
+          <span class="fragment fade-in">
+            <i class="fas fa-long-arrow-alt-down"></i>
+
+            <pre><code class="cs" data-trim data-noescape>
+                static <span class="fragment highlight-mark">async Task</span> Main()
+                {
+                    await SomeAsyncMethod();
+                }
+              </code></pre>
+          </span>
+        </section>
+        <section>
+          <h2>Default value initializers</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            public static void Run()
+            {
+                //variable initialization
+                IDictionary<string, int> dictionary = <span class="fragment highlight-mark">default</span>;
+    
+                var printer = new MyPrinter("some name");
+    
+                //default parameter value
+                printer.Print("It's me", <span class="fragment highlight-mark">default</span>);
+            }
+    
+            class MyPrinter
+            {
+                private readonly string _name;
+                private readonly string _defaultIndentation;
+    
+                //default parameter value
+                public MyPrinter(string name, int defaultIndentation = <span class="fragment highlight-mark">default</span>)
+                {
+                    _name = name;
+                    _defaultIndentation = new string(' ', defaultIndentation);
+                    Console.WriteLine($"Created MyPrinter with name '{_name}'");
+                }
+    
+                public void Print(object v, string prefix = ": ")
+                {
+                    Console.WriteLine(_defaultIndentation + prefix + v);
+                }
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h2>Inferred tuple element names</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            var min = 2;
+            var max = 10;
+            var avg = 5.5;
+            var minAvgMax = (<span class="fragment highlight-mark" data-fragment-index="1">min:</span> min, <span class="fragment highlight-mark" data-fragment-index="1">avg:</span> avg, <span class="fragment highlight-mark" data-fragment-index="1">max:</span> max);
+          </code></pre>
+
+          <span class="fragment fade-in">
+            <i class="fas fa-long-arrow-alt-down"></i>
+            <pre><code class="cs" data-trim data-noescape>
+              var min = 2;
+              var max = 10;
+              var avg = 5.5;
+              var minAvgMax = (min, avg, max);
+            </code></pre>
+          </span>
+        </section>
+      </section>
+      <section>
+        <h1>C# 7.2</h1>
+
+        <aside class="notes">
+          <a href="https://docs.microsoft.com/pl-pl/dotnet/csharp/whats-new/csharp-7-2">
+            https://docs.microsoft.com/pl-pl/dotnet/csharp/whats-new/csharp-7-2</a>
+        </aside>
+      </section>
       <section>In parameters</section>
       <section>Praktyczny przykład</section>
       <section>Ref struct widmo</section>
@@ -773,12 +927,16 @@
       <section>Readonly struct</section>
       <section>Non-trailing named arguments</section>
       <section>Private protected</section>
-      <section>C# 7.3</section>
+      <section>
+        <h1>C# 7.3</h1>
+      </section>
       <section>Dodatkowe ograniczenia typów (w końcu!)</section>
       <section>Ref local reassignment</section>
       <section>Tuples equality</section>
       <section>Backing-fields attributes</section>
-      <section>Co na horyzoncie? C# 8</section>
+      <section>
+        <h1>Co na horyzoncie? C# 8</h1>
+      </section>
       <section>Jeszcze bardziej rozbudowany pattern-matching i dekonstrukcja</section>
       <section>Nullable reference types</section>
       <section>Record classes</section>
@@ -788,6 +946,7 @@
       <section>Genericzne atrybuty</section>
       <section>Target-typed new</section>
       <section>Podsumowanie</section>
+      <section>Materiały</section>
       <section>Pytania</section>
 
     </div>

@@ -9,9 +9,6 @@ namespace Tuples
         {
             var numbers = new []{ -3, -2, -1, 0, 1, 2, 3, 4 ,5, 6 };
 
-            var t1 = new Tuple<int, double, int>(-3, 10, 4);
-            var t2 = (-3, 10, 4);
-
             {
                 var oldResult = OldTuples(numbers);
                 Console.WriteLine(oldResult);
