@@ -32,6 +32,14 @@
     <div class="slides">
 
       <section>
+        <img src="res/cshark-logo.png" />
+
+        <pre><code class="cs" data-trim data-noescape style="font-size: 3em; height: 1.15em; line-height: 1em">
+          Console.WriteLine("Hello Sharks!")
+        </code></pre>
+      </section>
+
+      <section>
         <h2>Nowości w języku
           <span class="fragment strike">Cool</span>
           <span class="fragment fade-in">C#</span>
@@ -79,6 +87,8 @@
         <ul class="fragment fade-in">
           <li>Generics</li>
           <li>Nullable types</li>
+          <li>Delegates</li>
+          <li>Anonymous methods</li>
           <li>Partial types</li>
           <li>Static classes</li>
           <li>Variance</li>
@@ -231,10 +241,10 @@
                 }</span>
             }
             </code></pre>
+        </section>
 
-          <aside class="notes">
-            Przykład
-          </aside>
+        <section>
+          <h1>Demo</h1>
         </section>
       </section>
 
@@ -427,6 +437,10 @@
                   }
             </code></pre>
         </section>
+
+        <section>
+          <h1>Demo</h1>
+        </section>
       </section>
       <section>
         <section>
@@ -503,6 +517,9 @@
           </code></pre>
         </section>
 
+        <section>
+          <h1>Demo</h1>
+        </section>
       </section>
       <section>
         <section>
@@ -555,11 +572,6 @@
               </code></pre>
             </span>
           </div>
-
-          <aside class="notes">
-            Przykład w VS
-          </aside>
-
         </section>
 
         <section>
@@ -632,7 +644,12 @@
             }
           </code></pre>
         </section>
+
+        <section>
+          <h1>Demo</h1>
+        </section>
       </section>
+
       <section>
         <section>
           <h2>Ref local/return</h2>
@@ -676,10 +693,10 @@
             var evenNumbers = new MyArray(2, 4, 6, 8, 10);
             <span class="fragment highlight-mark" data-fragment-index="1">ref</span> var number = <span class="fragment highlight-mark" data-fragment-index="1">ref</span> evenNumbers[2];
           </code></pre>
+        </section>
 
-          <aside class="notes">
-            Przykłady w VS
-          </aside>
+        <section>
+          <h1>Demo</h1>
         </section>
       </section>
       <section>
@@ -1160,18 +1177,16 @@
       <section>
         <h2>Tuples equality</h2>
 
-        <section>
-          <pre><code class="cs" data-trim data-noescape>
+        <pre><code class="cs" data-trim data-noescape>
             var equals = (10, 2, "kek") == (11, 2, "kek");
            </code></pre>
 
-          <span class="fragment fade-in">
-            <h3>Generated code</h3>
-            <pre><code class="cs" data-trim data-noescape>
+        <span class="fragment fade-in">
+          <h3>Generated code</h3>
+          <pre><code class="cs" data-trim data-noescape>
                 bool flag = 10 == 11 && 2 == 2 && "kek" == "kek";
              </code></pre>
-          </span>
-        </section>
+        </span>
       </section>
 
       <section>
@@ -1240,17 +1255,22 @@
         </section>
 
         <section>
-          <section>Nullable reference types</section>
+          <h2>Nullable reference types</h2>
 
-          <pre><code class="cs" data-trim data-noescape>
+          <span class="fragment fade-in">
+            <pre><code class="cs" data-trim data-noescape>
             string s = null; // Warning: Assignment of null to non-nullable reference type
           </code></pre>
+          </span>
 
-          <pre><code class="cs" data-trim data-noescape>
-            string? s = null; // Ok
-          </code></pre>
+          <span class="fragment fade-in">
+            <pre><code class="cs" data-trim data-noescape>
+              string? s = null; // Ok
+            </code></pre>
+          </span>
 
-          <pre><code class="cs" data-trim data-noescape>
+          <span class="fragment fade-in">
+            <pre><code class="cs" data-trim data-noescape>
               void M(string? s)
               {
                   Console.WriteLine(s.Length); // Warning: Possible null reference exception
@@ -1260,6 +1280,7 @@
                   }
               }
           </code></pre>
+          </span>
         </section>
 
         <section>
@@ -1280,11 +1301,17 @@
           <h2>Ranges and indeces</h2>
 
           <pre><code class="cs" data-trim data-noescape>
-              Index i1 = 3;  // number 3 from beginning
-              Index i2 = ^4; // number 4 from end
+              <span class="fragment highlight-mark" data-fragment-index="1">Index</span> i1 = 3;  // number 3 from beginning
+              <span class="fragment highlight-mark" data-fragment-index="1">Index</span> i2 = <span class="fragment highlight-mark" data-fragment-index="1">^</span>4; // number 4 from end
               int[] a = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
               Console.WriteLine($"{a[i1]}, {a[i2]}"); // "3, 6"
           </code></pre>
+
+          <span class="fragment fade-in" data-fragment-index="2">
+            <pre><code class="cs" data-trim data-noescape>
+              var slice = a[i1<span class="fragment highlight-mark" data-fragment-index="3">..</span>i2]; // { 3, 4, 5 }
+            </code></pre>
+          </span>
         </section>
 
         <section>
@@ -1294,7 +1321,7 @@
             interface ILogger
             {
                 void Log(LogLevel level, string message);
-                void Log(Exception ex) => Log(LogLevel.Error, ex.ToString()); // New overload
+                void Log(Exception ex) <span class="fragment highlight-mark">=> Log(LogLevel.Error, ex.ToString());</span> // New overload
             }
             
             class ConsoleLogger : ILogger
@@ -1344,6 +1371,12 @@
 
       <section>
         <h1>Podsumowanie</h1>
+
+        <ul>
+          <li class="fragment fade-in">Fajnie je</li>
+          <li class="fragment fade-in">Będzie jeszcze fajniej</li>
+          <li class="fragment fade-in">C# to je moje ulubiene</li>
+        </ul>
       </section>
       <section>
         <h2>Materiały</h2>
@@ -1370,6 +1403,11 @@
                 </a>
               </li>
             </ul>
+          </li>
+          <li>
+            <a href="https://blogs.msdn.microsoft.com/dotnet/2018/11/12/building-c-8-0/">
+              Zapowiedź C# 8
+            </a>
           </li>
           <li>
             <a href="https://github.com/Eragra3/whats-new-in-CSharp">Przentacja na GitHubie</a>
@@ -1410,7 +1448,8 @@
         loadIcons: false
       },
       width: '100%',
-      height: '100%'
+      height: '100%',
+      defaultTiming: 120
     });
   </script>
 </body>

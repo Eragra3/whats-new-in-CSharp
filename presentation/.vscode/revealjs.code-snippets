@@ -26,7 +26,7 @@
       "  </code></pre>",
       "</span>"
     ],
-    "description": "Add syntax coloring block for C#"
+    "description": "Add fade-in fragment with syntax coloring block for C#"
   },
   "reveal-code-cs": {
     "scope": "html",
@@ -53,5 +53,25 @@
       "<span class=\"fragment highlight-mark\" data-fragment-index=\"1\">$0</span>"
     ],
     "description": "Add mark animation with specified order"
+  },
+  "reveal-demo-section": {
+    "scope": "html",
+    "prefix": "rdemo",
+    "body": [
+      "<section>",
+      "  <h1>Demo</h1>",
+      "</section>"
+    ],
+    "description": "Add demo section"
+  },
+  "reveal-fragment-fadein": {
+    "scope": "html",
+    "prefix": "rfragfadein",
+    "body": [
+      "<span class=\"fragment fade-in\">",
+      "  $0",
+      "</span>"
+    ],
+    "description": "Add fade-in fragment"
   }
 }
