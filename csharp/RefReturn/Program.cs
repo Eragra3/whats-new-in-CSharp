@@ -8,7 +8,7 @@ namespace RefReturn
         {
             RefReturn.Run();
             RefReturnRefLocal.Run();
-            
+
             Console.ReadKey();
         }
     }

@@ -980,18 +980,19 @@
       </section>
 
       <section>
-        <h2>Ref struct</h2>
-        <ul>
-          <li>
-            Struktura będzie zawsze alokowana na stosie
-            <ul>
-              <li>nie może być członkiem klasy</li>
-              <li>nie może być użyta w miejscach, które wymagają alokacji na stercie</li>
-            </ul>
-          </li>
-        </ul>
+        <section>
+          <h2>Ref struct</h2>
+          <ul>
+            <li>
+              Struktura będzie zawsze alokowana na stosie
+              <ul>
+                <li>nie może być członkiem klasy</li>
+                <li>nie może być użyta w miejscach, które wymagają alokacji na stercie</li>
+              </ul>
+            </li>
+          </ul>
 
-        <pre><code class="cs" data-trim data-noescape>
+          <pre><code class="cs" data-trim data-noescape>
             <span class="fragment highlight-mark" data-fragment-index="1"><span class="fragment fade-in">readonly</span> ref</span> struct Point3dOn_ReadOnlyStack
             {
                 public readonly double X;
@@ -1006,16 +1007,99 @@
                 }
             }
         </code></pre>
+
+        </section>
+
+        <section>
+          <h1>Demo</h1>
+        </section>
       </section>
 
       <section>
-        <h2>Span</h2>
+        <section>
+          <h2>Span</h2>
 
-        
+          <pre><code class="cs" data-trim data-noescape>
+            public readonly ref struct Span&lt;T>
+            {
+              private readonly ref T _pointer;
+              private readonly int _length;
+              ...
+            }
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Stack allocation</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            unsafe
+            {
+                char* text = stackalloc char[ArraySize];
+            }
+          </code></pre>
+
+          <span class="fragment fade-in">
+            <i class="fas fa-long-arrow-alt-down"></i>
+            <pre><code class="cs" data-trim data-noescape>
+            Span&lt;char> text = stackalloc char[ArraySize];
+          </code></pre>
+          </span>
+
+          <aside class="notes">
+            <a href="https://blogs.msdn.microsoft.com/mazhou/2018/03/25/c-7-series-part-10-spant-and-universal-memory-management/">
+              https://blogs.msdn.microsoft.com/mazhou/2018/03/25/c-7-series-part-10-spant-and-universal-memory-management/</a>
+          </aside>
+
+        </section>
+
+        <section>
+          <h2>String as ReadOnlySpan</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+              var text = "A very nice string";
+              ReadOnlySpan&lt;char> readonlySpan =  text.AsSpan();
+
+              Console.WriteLine(text[4]);
+            </code></pre>
+        </section>
+
+        <section>
+          <h2>String slices</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+                var text = "A very nice string";
+                ReadOnlySpan&lt;char> readonlySpan =  text.AsSpan();
+                // no heap allocation
+                ReadOnlySpan&lt;char> slice = readonlySpan.Slice(2, 9);
+            </code></pre>
+        </section>
+
+        <section>
+          <h1>Demo</h1>
+        </section>
       </section>
+
       <section>
-        <h2>Memory</h2>
+        <section>
+          <h2>Memory</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            public readonly struct Memory&lt;T>
+            {
+              private readonly object _object;
+              private readonly int _index;
+              private readonly int _length;
+              ...
+            }
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Demo</h1>
+        </section>
       </section>
+
       <section>Non-trailing named arguments</section>
       <section>Private protected</section>
       <section>
