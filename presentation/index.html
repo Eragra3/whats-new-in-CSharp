@@ -1100,8 +1100,49 @@
         </section>
       </section>
 
-      <section>Non-trailing named arguments</section>
-      <section>Private protected</section>
+      <section>
+        <h2>Private protected</h2>
+
+        <span class="fragment fade-in" data-fragment-index="1">
+          <ul>
+            <li>Typy dzieciczące w tym samym projekcie mają dostęp (protected)</li>
+            <li>Typy poza projektem nie mają dostępu (private)</li>
+          </ul>
+        </span>
+
+        <h2>Protected internal</h2>
+
+        <span class="fragment fade-in" data-fragment-index="2">
+          <ul>
+            <li>Typy w tym samym projekcie mają dostęp (internal)</li>
+            <li>Typy dzieciczące poza projektem mają dostępu (protected)</li>
+          </ul>
+        </span>
+
+      </section>
+    </section>
+
+      <section>
+        <section>
+          <h2>Lecimy tutaj</h2>
+        </section>
+
+        <section>
+          <h2>Non-trailing named arguments</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+              LotsParameters("HelloWorld", ": ", infix: "", postfix: ";");
+          </code></pre>
+
+
+          <span class="fragment fade-in">
+            <i class="fas fa-long-arrow-alt-down"></i>
+            <pre><code class="cs" data-trim data-noescape>
+              LotsParameters("HelloWorld", ": ", infix: "",<span class="fragment highlight-mark"> </span>";");
+            </code></pre>
+          </span>
+        </section>
+
       <section>
         <h1>C# 7.3</h1>
       </section>
