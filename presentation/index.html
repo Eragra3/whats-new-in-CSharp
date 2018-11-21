@@ -131,6 +131,10 @@
 
       <section>
         <h1>C# 7.0</h1>
+
+        <aside class="notes">
+          <a href="https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7"></a>
+        </aside>
       </section>
       <section>
 
@@ -236,7 +240,7 @@
 
       <section>
         <section>
-          <h2>Krotki (tuples)</h2>
+          <h2>Tuples</h2>
 
           <pre><code class="cs" data-trim data-noescape>
             var t1 = new Tuple&lt;int, double, int&gt;(-3, 10.0, 4);
@@ -251,7 +255,7 @@
           </span>
         </section>
         <section>
-          <h2>Nazwane krotki</h2>
+          <h2>Named tuple elements</h2>
 
           <pre><code class="cs" data-trim data-noescape>
             var t1 = (min: -3, avg: 10.0, max: 4);
@@ -260,17 +264,17 @@
         </section>
 
         <section>
-          <h2>Dekonstrukcja</h2>
+          <h2>Deconstruction</h2>
 
           <pre><code class="cs" data-trim data-noescape>
             var minAvgMax = (min: -3, avg: 10.0, max: 4);
             var (min, avg, max) = minAvgMax;
             Console.WriteLine(min);
           </code></pre>
+        </section>
 
-          <aside class="notes">
-            Przykład
-          </aside>
+        <section>
+          <h1>Demo</h1>
         </section>
       </section>
 
@@ -283,7 +287,7 @@
           </aside>
         </section>
         <section>
-          <h2>"Is" pattern</h2>
+          <h2><i>Is</i> pattern</h2>
 
           <pre><code class="cs" data-trim data-noescape>
             if (p <span class="fragment highlight-mark" data-fragment-index="1">is Student</span>)
@@ -1120,7 +1124,7 @@
         </span>
 
       </section>
-    </section>
+      </section>
 
       <section>
         <section>
@@ -1142,28 +1146,239 @@
             </code></pre>
           </span>
         </section>
+      </section>
 
       <section>
         <h1>C# 7.3</h1>
+
+        <aside class="notes">
+          <a href="https://docs.microsoft.com/pl-pl/dotnet/csharp/whats-new/csharp-7-3">
+            https://docs.microsoft.com/pl-pl/dotnet/csharp/whats-new/csharp-7-3</a>
+        </aside>
       </section>
-      <section>Dodatkowe ograniczenia typów (w końcu!)</section>
-      <section>Ref local reassignment</section>
-      <section>Tuples equality</section>
-      <section>Backing-fields attributes</section>
+
       <section>
-        <h1>Co na horyzoncie? C# 8</h1>
+        <h2>Tuples equality</h2>
+
+        <section>
+          <pre><code class="cs" data-trim data-noescape>
+            var equals = (10, 2, "kek") == (11, 2, "kek");
+           </code></pre>
+
+          <span class="fragment fade-in">
+            <h3>Generated code</h3>
+            <pre><code class="cs" data-trim data-noescape>
+                bool flag = 10 == 11 && 2 == 2 && "kek" == "kek";
+             </code></pre>
+          </span>
+        </section>
       </section>
-      <section>Jeszcze bardziej rozbudowany pattern-matching i dekonstrukcja</section>
-      <section>Nullable reference types</section>
-      <section>Record classes</section>
-      <section>Domyślne implementacje interfejsów</section>
-      <section>Async streams</section>
-      <section>Ranges</section>
-      <section>Genericzne atrybuty</section>
-      <section>Target-typed new</section>
-      <section>Podsumowanie</section>
-      <section>Materiały</section>
-      <section>Pytania</section>
+
+      <section>
+        <h2>Enhanced generic constraints</h2>
+
+        <pre><code class="cs" data-trim data-noescape>
+            static void RequireEnum&lt;T>(T param) where T: Enum
+            {
+                throw new NotImplementedException();
+            }
+    
+            static void RequireDelegate&lt;T>(T param) where T: Delegate
+            {
+                throw new NotImplementedException();
+            }
+    
+            static void RequireUnmanaged&lt;T>(T param) where T: unmanaged
+            {
+                throw new NotImplementedException();
+            }
+          </code></pre>
+      </section>
+
+      <section>
+        <section>
+          <h1>Lecimy tutaj</h1>
+        </section>
+        <section>
+          <h2>Backing-fields attributes</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            [<span class="fragment highlight-mark">field:</span> SomeThingAboutFieldAttribute]
+            public int SomeProperty { get; set; }
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Ref local reassignment</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            var evenNumbers = new MyArray(2, 4, 6, 8, 10);
+            ref var number = ref evenNumbers[2];
+            <span class="fragment highlight-mark">number = ref evenNumbers[1];</span>
+          </code></pre>
+        </section>
+
+        <section>
+          <h2><i>Stackalloc</i> arrays support initializers</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            int* pArr = stackalloc int[3] <span class="fragment highlight-mark" data-fragment-index="1">{1, 2, 3}</span>;
+            int* pArr2 = stackalloc int[] <span class="fragment highlight-mark" data-fragment-index="1">{1, 2, 3}</span>;
+            Span&lt;int> arr = stackalloc [] <span class="fragment highlight-mark" data-fragment-index="1">{1, 2, 3}</span>;
+          </code></pre>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Co na horyzoncie? C# 8</h1>
+
+          <aside class="notes">
+            <a href="https://blogs.msdn.microsoft.com/dotnet/2018/11/12/building-c-8-0/">
+              https://blogs.msdn.microsoft.com/dotnet/2018/11/12/building-c-8-0/</a>
+          </aside>
+        </section>
+
+        <section>
+          <section>Nullable reference types</section>
+
+          <pre><code class="cs" data-trim data-noescape>
+            string s = null; // Warning: Assignment of null to non-nullable reference type
+          </code></pre>
+
+          <pre><code class="cs" data-trim data-noescape>
+            string? s = null; // Ok
+          </code></pre>
+
+          <pre><code class="cs" data-trim data-noescape>
+              void M(string? s)
+              {
+                  Console.WriteLine(s.Length); // Warning: Possible null reference exception
+                  if (s != null)
+                  {
+                      Console.WriteLine(s.Length); // Ok: You won't get here if s is null
+                  }
+              }
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Async streams</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            async IAsyncEnumerable<int> GetBigResultsAsync()
+            {
+                await foreach (var result in GetResultsAsync())
+                {
+                    if (result > 20) yield return result; 
+                }
+            }
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Ranges and indeces</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+              Index i1 = 3;  // number 3 from beginning
+              Index i2 = ^4; // number 4 from end
+              int[] a = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+              Console.WriteLine($"{a[i1]}, {a[i2]}"); // "3, 6"
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Default implementations of interface members</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            interface ILogger
+            {
+                void Log(LogLevel level, string message);
+                void Log(Exception ex) => Log(LogLevel.Error, ex.ToString()); // New overload
+            }
+            
+            class ConsoleLogger : ILogger
+            {
+                public void Log(LogLevel level, string message) { ... }
+                // Log(Exception) gets default implementation
+            }
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Recursive patterns</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            IEnumerable&lt;string> GetEnrollees()
+            {
+                foreach (var p in People)
+                {
+                    if (p is Student { Graduated: false, Name: string name }) yield return name;
+                }
+            }
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Switch expressions</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            var area = figure switch 
+            {
+                Line _      => 0,
+                Rectangle r => r.Width * r.Height,
+                Circle c    => Math.PI * c.Radius * c.Radius,
+                _           => throw new UnknownFigureException(figure)
+            };
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Target-typed new-expressions</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            Point[] ps = { new (1, 4), new (3,-2), new (9, 5) }; // all Points
+          </code></pre>
+        </section>
+      </section>
+
+      <section>
+        <h1>Podsumowanie</h1>
+      </section>
+      <section>
+        <h2>Materiały</h2>
+
+        <ul>
+          <li>
+            Microsoft Documentation
+            <ul>
+              <li>
+                <a href="https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7">
+                  What's new in C# 7
+                </a>
+              </li>
+              <li><a href="https://docs.microsoft.com/pl-pl/dotnet/csharp/whats-new/csharp-7-1">
+                  What's new in C# 7.1
+                </a>
+              </li>
+              <li><a href="https://docs.microsoft.com/pl-pl/dotnet/csharp/whats-new/csharp-7-2">
+                  What's new in C# 7.2
+                </a>
+              </li>
+              <li><a href="https://docs.microsoft.com/pl-pl/dotnet/csharp/whats-new/csharp-7-3">
+                  What's new in C# 7.3
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="https://github.com/Eragra3/whats-new-in-CSharp">Przentacja na GitHubie</a>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Pytania</h2>
+      </section>
 
     </div>
   </div>
