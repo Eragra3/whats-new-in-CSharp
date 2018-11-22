@@ -365,6 +365,69 @@
         </section>
 
         <section>
+          <h2>When clauses</h2>
+
+          <pre><code class="cs" data-trim data-noescape>
+            if (p is IHasSightDefect)
+            {
+                var hsd = (IHasSightDefect)p;
+
+                if (Math.Abs(hsd.SightDefect.leftEye) > 2 || Math.Abs(hsd.SightDefect.rightEye) > 2)
+                {
+                    Console.WriteLine("\tSight problems");
+                }
+            }
+            // Can't put else here!
+            if (p is Programmer)
+            {
+                var pr = (Programmer)p;
+
+                if (pr.CSharp > SkillLevel.Basic || pr.Java > SkillLevel.Basic)
+                {
+                    Console.WriteLine("\tGreat programmer!");
+                }
+                else if (pr.CSharp == SkillLevel.None && pr.CSharp == SkillLevel.None)
+                {
+                    Console.WriteLine("\tNo skill :C. Go JavaScript");
+                }
+                else
+                {
+                    Console.WriteLine("\tRegular programmer");
+                }
+            }
+          </code></pre>
+
+          <span class="fragment fade-in">
+            <i class="fas fa-long-arrow-alt-down"></i>
+
+            <pre><code class="cs" data-trim data-noescape>
+                switch (p)
+                {
+                    case IHasSightDefect hsd when Math.Abs(hsd.SightDefect.leftEye) > 2 || Math.Abs(hsd.SightDefect.rightEye) > 2:
+    
+                        Console.WriteLine("\tSight problems");
+                        break;
+    
+                    case Programmer pr when pr.CSharp > SkillLevel.Basic || pr.Java > SkillLevel.Basic:
+    
+                        Console.WriteLine("\tGreat programmer!");
+                        break;
+    
+                    case Programmer pr when pr.CSharp == SkillLevel.None && pr.CSharp == SkillLevel.None:
+    
+                        Console.WriteLine("\tNo skill :C. Go JavaScript");
+                        break;
+    
+                    case Programmer _:
+    
+                        Console.WriteLine("\tRegular programmer");
+                        break;
+                }
+            </code></pre>
+          </span>
+        </section>
+
+        <section>
           <h2>Liskov is SO<b>L</b>ID</h2>
 
           <ul>
@@ -399,49 +462,24 @@
           <h2>Co jest nie tak z "safe castem"</h2>
 
           <pre><code class="cs" data-trim data-noescape>
-                        static void SafeCast()
-                        {
-                            object numbers = Enumerable.Range(-3, 10).ToArray();
-                
-                            foreach (var number in <span class="fragment highlight-mark" data-fragment-index="1">numbers as IEnumerable&lt;int&gt;</span>) <span class="fragment fade-in" style="color: red" data-fragment-index="1">NullPointerException</span>
-                            {
-                                Console.WriteLine(number);
-                            }
-                        }
-                    </code></pre>
-
-        </section>
-        <section>
-          <h2>Co jest nie tak z "safe castem" (2)</h2>
-
-          <pre><code class="cs" data-trim data-noescape>
-              private static void SafeCast()
+              static void SafeCast()
+              {
+                  object numbers = Enumerable.Range(-3, 10).ToList();
+      
+                  foreach (var number in <span class="fragment highlight-mark">numbers as int[]</span>)<span class="fragment fade-in" style="color: red" data-fragment-index="1"> NullPointerException</span>
                   {
-                      object obj = Enumerable.Range(-3, 10).ToArray();
-                      IEnumerator&lt;int&gt; enumerator = <span class="fragment highlight-mark">(obj as IEnumerable&lt;int&gt;).GetEnumerator()</span>;
-                      try
-                      {
-                          while (enumerator.MoveNext())
-                          {
-                              int current = enumerator.Current;
-                              Console.WriteLine(current);
-                          }
-                      }
-                      finally
-                      {
-                          if (enumerator != null)
-                          {
-                              enumerator.Dispose();
-                          }
-                      }
+                      Console.WriteLine(number);
                   }
-            </code></pre>
+              }
+          </code></pre>
+
         </section>
 
         <section>
           <h1>Demo</h1>
         </section>
       </section>
+
       <section>
         <section>
           <h2>Discards</h2>
@@ -1412,6 +1450,9 @@
           <li>
             <a href="https://github.com/Eragra3/whats-new-in-CSharp">Przentacja na GitHubie</a>
           </li>
+          <li>
+            <a href="https://sharplab.io/">SharpLab</a>
+          </li>
         </ul>
       </section>
       <section>
@@ -1449,7 +1490,7 @@
       },
       width: '100%',
       height: '100%',
-      defaultTiming: 120
+      defaultTiming: 60
     });
   </script>
 </body>
