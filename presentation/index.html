@@ -35,7 +35,7 @@
         <img src="res/cshark-logo.png" />
 
         <pre><code class="cs" data-trim data-noescape style="font-size: 3em; height: 1.15em; line-height: 1em">
-          Console.WriteLine("Hello Sharks!")
+          Console.WriteLine("Hello Sharks!");
         </code></pre>
       </section>
 
@@ -268,7 +268,7 @@
           <h2>Named tuple elements</h2>
 
           <pre><code class="cs" data-trim data-noescape>
-            var t1 = (min: -3, avg: 10.0, max: 4);
+            var t1 = (<span class="fragment highlight-mark" data-fragment-index="1">min:</span> -3, <span class="fragment highlight-mark" data-fragment-index="1">avg:</span> 10.0, <span class="fragment highlight-mark" data-fragment-index="1">max:</span> 4);
             Console.WriteLine(t1.min);
           </code></pre>
         </section>
@@ -278,7 +278,7 @@
 
           <pre><code class="cs" data-trim data-noescape>
             var minAvgMax = (min: -3, avg: 10.0, max: 4);
-            var (min, avg, max) = minAvgMax;
+            var <span class="fragment highlight-mark" data-fragment-index="1">(min, avg, max)</span> = minAvgMax;
             Console.WriteLine(min);
           </code></pre>
         </section>

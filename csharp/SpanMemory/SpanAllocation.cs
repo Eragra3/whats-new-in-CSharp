@@ -4,7 +4,7 @@ namespace SpanMemory
 {
     class SpanAllocation
     {
-        private const int ArraySize = 1_000_00;
+        private const int ArraySize = 1_000_00000;
 
         public static void Run()
         {
@@ -38,7 +38,7 @@ namespace SpanMemory
 
             text[10] = 'd';
             text[11] = 'u';
-            text[12] = 'p';
+            text[100012] = 'p';
 
             Console.Write(text[10]);
             Console.Write(text[11]);
